@@ -44,7 +44,11 @@ def readFile(fileName, keyForData):
 			line = f.readline()
 			if line == '':
 				break
-			if re.search(r'^Revision$', line) != None:
+			matchObj = re.match(r'^Subject\:\s*secutix2\-([a-z]{2})', line)
+			if matchObj:
+				module = matchObj.group(1)
+				print(module)
+			elif re.search(r'^Revision$', line) != None:
 				revision = readValue(f, r'(\d*)')
 				revisions[keyForData].append(revision)
 			elif re.search(r'^Author$', line) != None:
